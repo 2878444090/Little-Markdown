@@ -2,37 +2,41 @@ import os
 
 data = []
 
+
 # 退出文本编辑器
-def exitEditor():
+def exit_editor():
     print("exit editor !")
     os.system('cls')
 
+
 # 文本编辑模式
 # 将编辑的内容暂时保存在一个列表中
-def textEditor():
+def text_editor():
     os.system('cls')
     print("如果需要退出编辑，回车后输入  :q  ")
     while True:
-        input_ch=input()
+        input_ch = input()
         if input_ch == ':q':
-            #os.system('cls')
+            # os.system('cls')
             break
         else:
             data.append(input_ch)
-    #print(data)
+    # print(data)
     return data
 
+
 # 文本保存模式
-def saveText():
+def save_text():
     os.system('cls')
     filename_w = input("Please input the file name: ")
-    with open(filename_w,'w')as fw:
+    with open(filename_w, 'w')as fw:
         for item in data:
             fw.writelines(item)
     print("The file has saved !" + "\t" + "filename is : " + filename_w)
 
+
 # 读取文件
-def readFile():
+def read_file():
     os.system('cls')
     filename_r = input("Please input the file name: ")
     try:
@@ -42,31 +46,36 @@ def readFile():
         input("输入任意键结束")
     except IOError:
         print("The file can not find !")
-    
 
-#### 实现 switch 功能 ####
-fun_dict =  {'i': textEditor, 'w': saveText, 'r': readFile, 'q':exitEditor}    # 用于分类的字典
+
+# 实现 switch 功能
+fun_dict = {'i': text_editor, 'w': save_text, 'r': read_file, 'q': exit_editor}  # 用于分类的字典
+
+
 # 缺省函数
-def findNone():
+def find_none():
     print("Can not find the Key !")
 
+
 def switch(x):
-    return fun_dict.get(x, findNone)()
+    return fun_dict.get(x, find_none)()
 
 
-#### 主界面 ####
-def welcom():
+# 主界面
+def welcome():
     print("Welcome to Simple VIM Editor 1.0 !")
     print("Please input: i to editor, r to read, w to save, q to quit. ")
 
-def main_fun(command):
-    switch(command)
+
+def main_fun(command_mainfun):
+    switch(command_mainfun)
     os.system('cls')
 
+
 while True:
-    welcom()
+    welcome()
     command = input("input: ")
-    if(command == 'q'):
+    if command == 'q':
         break
-    if(command == 'w' or command == 'r' or command == 'i'):
+    if command == 'w' or command == 'r' or command == 'i':
         main_fun(command)
